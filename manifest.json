@@ -1,0 +1,38 @@
+{
+    "manifest_version": 2,
+    "name": "Kien's First Downloader",
+    "version": "1.6.2",
+
+    "description": "Kien's redbubble image downloader",
+    "icons": {
+      "128": "icon128.png",
+      "48": "icon48.png",
+      "16": "icon16.png"
+    },
+
+    "content_scripts": [
+      {
+        "matches":["https://www.redbubble.com/*/shop/*","https://www.redbubble.com/shop/*"],
+        "js":["content.js"]
+      },
+      {
+        "matches":["https://www.etsy.com/*/search?*","https://www.etsy.com/search?*"],
+        "js":["estycontent.js"]
+      },
+      {
+        "matches":["https://www.etsy.com/*/shop/*","https://www.etsy.com/shop/*"],
+        "js":["estyshop.js"]
+      }
+    ],
+    "background": {
+      "scripts": ["background.js"],
+      "persistent": false
+    },
+    "permissions": [
+      "downloads"
+    ],
+    "browser_action": {
+      "default_icon": "icon16.png"
+      ,"default_popup": "popup.html"
+    }
+}
