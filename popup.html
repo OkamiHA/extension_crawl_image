@@ -5,11 +5,21 @@
 	<script type="text/javascript" src="popup.js"></script>
 	<table>
 		<tr>
-	    	<p style="text-align:center;">Folder:<input type="text" id="Folder" value="redbubble"></p>
-	  	</tr>
-	  	<tr>
-	    	<td><button id="bt_one">Download images</button></td>
-	  	</tr>
+			<p>Request Url:<input type="text" id="currentUrl" style="display: block" ></p>
+		</tr>
+		<tr>
+			<p>Save Location:<input type="text" id="saveLocation"  style="display: block"></p>
+		</tr>
+		<tr>
+			<p id="resultCrawler"></p><button id=download0>Download All!</button>
+		</tr>
+	</table>
+	<button type="button" class="collapsible">Open Collapsible</button>
+	<table id=links>
+	<tr>
+		<th><input type=checkbox checked id=toggle_all></th>
+		<th align="left">URL</th>
+	</tr>
 	</table>
 </body>
 </html>
