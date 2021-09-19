@@ -12,9 +12,6 @@ links = links.filter(function (element) {
   }
   return flag;
 }).map(function (element) {
-  // Return an anchor's href attribute, stripping any URL fragment (hash '#').
-  // If the html specifies a relative path, chrome converts it to an absolute
-  // URL.
   var dataImage = {};
   const illegalCharacters = "\/:*?\"<>|";
   var imageAlt = element.getAttribute("alt");
