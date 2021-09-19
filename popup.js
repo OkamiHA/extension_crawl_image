@@ -2,8 +2,8 @@ var allLinks = [];
 function downloadCheckedLinks() {
   for (var i = 0; i < allLinks.length; ++i) {
     chrome.downloads.download({
-      url: visibleLinks[i].src,
-      filename: visibleLinks[i].name
+      url: allLinks[i].src,
+      filename: allLinks[i].name
     });   
   }
   alert("Download success!");
