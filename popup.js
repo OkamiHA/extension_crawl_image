@@ -44,7 +44,7 @@ window.onload = function () {
           chrome.tabs.executeScript(
             activeTabs[0].id, { file: "wanderprintscontent.js", allFrames: true });
         }
-        if (currentUrl.toString().includes("yeahhcustom")){
+        else if (currentUrl.toString().includes("yeahhcustom")){
           chrome.tabs.executeScript(
             activeTabs[0].id, { file: "yeahhcustom-content.js", allFrames: true });
         }
