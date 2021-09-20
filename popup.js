@@ -6,9 +6,12 @@ function downloadCheckedLinks() {
       filename: allLinks[i].name
     });   
   }
-  alert("Download success!");
-
+  if (allLinks.length > 0){
+    var resultDownload = "Download success!";
+    document.getElementById("resultDownload").innerHTML = resultDownload;
+  }
 }
+
 
 
 chrome.runtime.onMessage.addListener(function (links) {
