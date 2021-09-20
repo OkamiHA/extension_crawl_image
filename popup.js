@@ -18,6 +18,7 @@ chrome.runtime.onMessage.addListener(function (links) {
   var resultCrawler = "Find " + links.length + " image(s) in this site";
   document.getElementById("resultCrawler").innerHTML = resultCrawler;
   chrome.browserAction.setBadgeText({text: links.length.toString()});
+  console.log(links);
   if (links.length > 0) {
     document.getElementById("resultCrawler").style.color = "green";
   }
@@ -37,9 +38,20 @@ window.onload = function () {
   chrome.windows.getCurrent(function (currentWindow) {
     chrome.tabs.query({ active: true, windowId: currentWindow.id },
       function (activeTabs) {
-        document.getElementById("currentUrl").value = activeTabs[0].url;
-        chrome.tabs.executeScript(
-          activeTabs[0].id, { file: "shoptifycontent.js", allFrames: true });
+        var currentUrl = activeTabs[0].url;
+        document.getElementById("currentUrl").value = currentUrl;
+        if (currentUrl.toString().includes("wanderprints")){
+          chrome.tabs.executeScript(
+            activeTabs[0].id, { file: "wanderprintscontent.js", allFrames: true });
+        }
+        if (currentUrl.toString().includes("yeahhcustom")){
+          chrome.tabs.executeScript(
+            activeTabs[0].id, { file: "yeahhcustom-content.js", allFrames: true });
+        }
+        else {
+          chrome.tabs.executeScript(
+            activeTabs[0].id, { file: "shoptifycontent.js", allFrames: true });
+        } 
       });
   });
 };
