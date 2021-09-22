@@ -1,4 +1,4 @@
-async function main(){
+async function main() {
     var links = [];
     var allLinks = [].slice.apply(document.getElementsByTagName('a'));
     var validClassAttribute = "snize-view-link";
@@ -20,27 +20,29 @@ async function main(){
         var imageTag = [].slice.apply(doc.getElementsByTagName('img'));
         imageTag = imageTag.filter(function (element) {
             var flag = false
-            if (element.getAttribute("srcset") && element.getAttribute("data-index") == 0){
-              flag = true
+            if (element.getAttribute("srcset") && element.getAttribute("data-index") == 0) {
+                flag = true
             }
             return flag;
-          }).map(function (element) {
+        }).map(function (element) {
             var dataImage = {};
             const illegalCharacters = "\/:*?\"<>|";
             var imageAlt = element.getAttribute("alt");
-            for (const illegalCharacter of illegalCharacters){
-              imageAlt = imageAlt.replace(illegalCharacter, "");
+            imageAlt = imageAlt.replaceAll('&amp;', "&").replaceAll('&gt;', ">").replaceAll('&lt;', "<")
+                .replaceAll('&quot;', "\"").replaceAll('&#39;', "\'");
+            for (const illegalCharacter of illegalCharacters) {
+                imageAlt = imageAlt.replaceAll(illegalCharacter, "");
             }
             dataImage["name"] = imageAlt + ".jpeg";
             var imageSourceSets = element.getAttribute("srcset");
-            if (imageSourceSets){
+            if (imageSourceSets) {
                 var listImageSourceSet = imageSourceSets.split(",");
                 listImageSourceSet.sort();
-                for (const imageSourceSet of listImageSourceSet){
+                for (const imageSourceSet of listImageSourceSet) {
                     var dataImageSource = imageSourceSet.trim().split(" ");
                     var imageWidth = dataImageSource[dataImageSource.length - 1];
                     imageWidth = imageWidth.replace("w", "").trim();
-                    if (Number(imageWidth) >= 1000){
+                    if (Number(imageWidth) >= 1000) {
                         dataImage["src"] = "https:" + dataImageSource[0].trim();
                         return dataImage;
                     }

@@ -2,11 +2,11 @@ var links = [].slice.apply(document.getElementsByTagName('img'));
 var prefixImageId = "ProductCardImage-collection-template";
 links = links.filter(function (element) {
   var flag = false
-  if (element.getAttribute("id")){
+  if (element.getAttribute("id")) {
     if (element.getAttribute("data-src") && element.getAttribute("id").includes(prefixImageId)) {
       flag = true;
     }
-    if (element.getAttribute("data-srcset") && element.getAttribute("id").includes(prefixImageId)){
+    if (element.getAttribute("data-srcset") && element.getAttribute("id").includes(prefixImageId)) {
       flag = true;
     }
   }
@@ -15,8 +15,10 @@ links = links.filter(function (element) {
   var dataImage = {};
   const illegalCharacters = "\/:*?\"<>|";
   var imageAlt = element.getAttribute("alt");
-  for (const illegalCharacter of illegalCharacters){
-    imageAlt = imageAlt.replace(illegalCharacter, "");
+  imageAlt = imageAlt.replaceAll('&amp;', "&").replaceAll('&gt;', ">").replaceAll('&lt;', "<")
+    .replaceAll('&quot;', "\"").replaceAll('&#39;', "\'");
+  for (const illegalCharacter of illegalCharacters) {
+    imageAlt = imageAlt.replaceAll(illegalCharacter, "");
   }
   dataImage["name"] = imageAlt + ".jpeg";
   var imageSourceSet = element.getAttribute("data-srcset");
@@ -24,16 +26,16 @@ links = links.filter(function (element) {
   var dataWidths = element.getAttribute("data-widths").replace("[", "").replace("]", "");
   var listWidth = dataWidths.split(",").map(Number);
   var validWidth = 0;
-  for (const width of listWidth){
-    if (width >= 1000){
+  for (const width of listWidth) {
+    if (width >= 1000) {
       validWidth = width;
       break;
     }
   }
   if (imageSourceSet) {
     var listSourceSet = imageSourceSet.split(",");
-    for (const urlSourceSet of listSourceSet){
-      if (urlSourceSet.endsWith(validWidth.toString() + "w")){
+    for (const urlSourceSet of listSourceSet) {
+      if (urlSourceSet.endsWith(validWidth.toString() + "w")) {
         dataImage["src"] = "https:" + urlSourceSet.trim().split(" ")[0];
         return dataImage;
       }
