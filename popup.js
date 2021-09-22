@@ -12,8 +12,6 @@ function downloadCheckedLinks() {
   }
 }
 
-
-
 chrome.runtime.onMessage.addListener(function (links) {
   var resultCrawler = "Find " + links.length + " image(s) in this site";
   document.getElementById("resultCrawler").innerHTML = resultCrawler;
@@ -34,7 +32,8 @@ chrome.runtime.onMessage.addListener(function (links) {
 
 window.onload = function () {
   document.getElementById("download0").onclick = downloadCheckedLinks;
-
+  document.getElementById("resultCrawler").innerHTML = "Finding images...";
+  document.getElementById("resultCrawler").style.color = "blue";
   chrome.windows.getCurrent(function (currentWindow) {
     chrome.tabs.query({ active: true, windowId: currentWindow.id },
       function (activeTabs) {
@@ -44,7 +43,7 @@ window.onload = function () {
           chrome.tabs.executeScript(
             activeTabs[0].id, { file: "wanderprintscontent.js", allFrames: true });
         }
-        if (currentUrl.toString().includes("yeahhcustom")){
+        else if (currentUrl.toString().includes("yeahhcustom")){
           chrome.tabs.executeScript(
             activeTabs[0].id, { file: "yeahhcustom-content.js", allFrames: true });
         }
