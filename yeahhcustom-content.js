@@ -47,7 +47,7 @@ async function main(){
                 }
             }
         });
-        links.push(imageTag);
+        links.push(imageTag[0]);
     }
     chrome.runtime.sendMessage(links);
 }
