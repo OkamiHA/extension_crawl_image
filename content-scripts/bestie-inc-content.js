@@ -20,7 +20,7 @@ links = links.filter(function (element) {
             var imageWidth = dataImageSource[dataImageSource.length - 1];
             imageWidth = imageWidth.replace("w", "").trim();
             if (Number(imageWidth) >= 1000) {
-                dataImage["src"] = "https:" + dataImageSource[0].trim();
+                dataImage["src"] = dataImageSource[0].trim();
                 return dataImage;
             }
         }

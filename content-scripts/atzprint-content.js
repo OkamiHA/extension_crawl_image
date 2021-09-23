@@ -26,10 +26,10 @@ async function atzprintCrawler() {
         }).map(function (element) {
             let dataScript = JSON.parse(element.text);
             if (dataScript.image) {
-                let imageAlt = dataScript.image;
+                let imageAlt = dataScript.name;
                 imageAlt = imageAlt.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<")
                     .replace(/&quot;/g, "\"").replace(/&#39;/g, "\'").replace(/[\/:*?\"<>|]/g, "");
-                return { "src": imageAlt, "name": dataScript.name };
+                return { "src": dataScript.image, "name": imageAlt + ".jpeg" };
             }
         });
         links.push(scriptTags[0]);
