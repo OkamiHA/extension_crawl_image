@@ -5,16 +5,16 @@
 
     "description": "Tool crawler image",
     "icons": {
-      "128": "icon128.png",
-      "48": "icon48.png",
-      "16": "icon16.png"
+      "128": "icons/icon128.png",
+      "48": "icons/icon48.png",
+      "16": "icons/icon16.png"
     },
     "permissions": [
       "tabs",
       "downloads", "<all_urls>"
     ],
     "browser_action": {
-      "default_icon": "icon16.png"
+      "default_icon": "icons/icon16.png"
       ,"default_popup": "popup.html"
     }
 }

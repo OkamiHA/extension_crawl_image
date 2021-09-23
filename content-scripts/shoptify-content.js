@@ -13,13 +13,9 @@ links = links.filter(function (element) {
   return flag;
 }).map(function (element) {
   var dataImage = {};
-  const illegalCharacters = "\/:*?\"<>|";
   var imageAlt = element.getAttribute("alt");
-  imageAlt = imageAlt.replaceAll('&amp;', "&").replaceAll('&gt;', ">").replaceAll('&lt;', "<")
-    .replaceAll('&quot;', "\"").replaceAll('&#39;', "\'");
-  for (const illegalCharacter of illegalCharacters) {
-    imageAlt = imageAlt.replaceAll(illegalCharacter, "");
-  }
+  imageAlt = imageAlt.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<")
+    .replace(/&quot;/g, "\"").replace(/&#39;/g, "\'").replace(/[\/:*?\"<>|]/g, "");
   dataImage["name"] = imageAlt + ".jpeg";
   var imageSourceSet = element.getAttribute("data-srcset");
   var imageSource = element.getAttribute("data-src");

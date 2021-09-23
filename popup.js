@@ -1,10 +1,16 @@
 var allLinks = [];
-function downloadCheckedLinks() {
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+async function downloadCheckedLinks() {
   for (var i = 0; i < allLinks.length; ++i) {
     chrome.downloads.download({
       url: allLinks[i].src,
       filename: allLinks[i].name
-    });   
+    });
+    if (i % 50 === 0){
+      await sleep(2000);
+    }   
   }
   if (allLinks.length > 0){
     var resultDownload = "Download success!";
@@ -41,15 +47,23 @@ window.onload = function () {
         document.getElementById("currentUrl").value = currentUrl;
         if (currentUrl.toString().includes("wanderprints")){
           chrome.tabs.executeScript(
-            activeTabs[0].id, { file: "wanderprintscontent.js", allFrames: true });
+            activeTabs[0].id, { file: "./content-scripts/wanderprints-content.js", allFrames: true });
         }
         else if (currentUrl.toString().includes("yeahhcustom")){
           chrome.tabs.executeScript(
-            activeTabs[0].id, { file: "yeahhcustom-content.js", allFrames: true });
+            activeTabs[0].id, { file: "./content-scripts/yeahhcustom-content.js", allFrames: true });
+        }
+        else if (currentUrl.toString().includes("atzprint")){
+          chrome.tabs.executeScript(
+            activeTabs[0].id, { file: "./content-scripts/atzprint-content.js", allFrames: true });
+        }
+        else if (currentUrl.toString().includes("bestie-inc")){
+          chrome.tabs.executeScript(
+            activeTabs[0].id, { file: "./content-scripts/bestie-inc-content.js", allFrames: true });
         }
         else {
           chrome.tabs.executeScript(
-            activeTabs[0].id, { file: "shoptifycontent.js", allFrames: true });
+            activeTabs[0].id, { file: "./content-scripts/shoptify-content.js", allFrames: true });
         } 
       });
   });
